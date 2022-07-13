@@ -1,6 +1,6 @@
-import signUpSchema from "../schemas/authSchema.js";
+import signUpSchema from "../schemas/signupSchema.js";
 
-export async function validateSignUp(req, res, next) {    
+export async function signUpDataVerification(req, res, next) { 
     
     const { error } = signUpSchema.validate(req.body, { abortEarly: false });
     

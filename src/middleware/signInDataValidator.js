@@ -1,4 +1,4 @@
-import signUpSchema from "../schemas/authSchema.js";
+import signUpSchema from "./../schemas/signupSchema.js";
 
 export async function signInDataVerification (req, res, next) {
 
