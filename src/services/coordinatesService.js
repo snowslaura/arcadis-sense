@@ -9,28 +9,8 @@ export async function postCoordinate(userId, name, xCoordinate, yCoordinate){
     await coordinateRepository.postCoordinate(userId, name, xCoordinate, yCoordinate)    
 }
 
-export async function postParameters(
-    coordinateId,    
-    aluminioDissolvido,
-    arsenioTotal,
-    chumboTotal,
-    cobreDissolvido,
-    escherichiaColi,
-    cromoTotal,
-    cadmioTotal,
-    dbo,
-    irregular){
-        await coordinateRepository.postParameters(
-        coordinateId,    
-        aluminioDissolvido,
-        arsenioTotal,
-        chumboTotal,
-        cobreDissolvido,
-        escherichiaColi,
-        cromoTotal,
-        cadmioTotal,
-        dbo,
-        irregular)    
+export async function deleteCoordinate(coordId) {
+    await coordinateRepository.deleteCoordinate(coordId)    
 }
 
 export async function getCoordinate(userId,id){
@@ -38,7 +18,4 @@ export async function getCoordinate(userId,id){
     return coordinate
 }
 
-export async function getIrregularCoordinate(userId,id){
-    const {rows:coordinate} = await coordinateRepository.getIrregularCoordinateByUserIdAndId(userId,id)
-    return coordinate
-}
+

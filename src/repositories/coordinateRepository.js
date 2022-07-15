@@ -1,4 +1,4 @@
-import db from "../../config/db.js";
+
 
 export async function getCoordinatesByUserId(userId) {
     return db.query(`
@@ -15,40 +15,11 @@ export async function postCoordinate(userId, name, xCoordinate, yCoordinate){
         [userId, name, xCoordinate, yCoordinate]);
 }
 
-export async function postParameters(
-    coordinateId,    
-    aluminioDissolvido,
-    arsenioTotal,
-    chumboTotal,
-    cobreDissolvido,
-    escherichiaColi,
-    cromoTotal,
-    cadmioTotal,
-    dbo,
-    irregular){
+export async function deleteCoordinate(coordId){
     return db.query(`
-        INSERT INTO kpi
-        ("coordinateId",    
-        "aluminioDissolvido",
-        "arsenioTotal",
-        "chumboTotal",
-        "cobreDissolvido",
-        "escherichiaColi",
-        "cromoTotal",
-        "cadmioTotal",
-        dbo,
-        irregular)
-        VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10)`,
-        [coordinateId,    
-        aluminioDissolvido,
-        arsenioTotal,
-        chumboTotal,
-        cobreDissolvido,
-        escherichiaColi,
-        cromoTotal,
-        cadmioTotal,
-        dbo,
-        irregular]);
+        DELETE  FROM coordinates
+        WHERE id=$1`,
+        [coordId]);
 }
 
 export async function getCoordinateByUserIdAndId(userId,id){
@@ -58,15 +29,5 @@ export async function getCoordinateByUserIdAndId(userId,id){
         JOIN kpi
         ON coordinates.id = kpi."coordinateId"
         WHERE coordinates."userId"=$1 AND coordinates.id=$2`,
-        [userId,id]);
-}
-
-export async function getIrregularCoordinateByUserIdAndId(userId,id){
-    return db.query(`
-        SELECT coordinates.*, kpi.*
-        FROM coordinates
-        JOIN kpi
-        ON coordinates.id = kpi."coordinateId"
-        WHERE coordinates."userId"=$1 AND coordinates.id=$2 AND kpi.irregular = true`,
         [userId,id]);
 }

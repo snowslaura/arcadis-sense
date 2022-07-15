@@ -12,31 +12,13 @@ export async function postCoordinate(req,res){
     res.sendStatus(201)
 }
 
-export async function postParameters(req,res){
-    const { coordinateId,    
-    aluminioDissolvido,
-	arsenioTotal,
-	chumboTotal,
-	cobreDissolvido,
-	escherichiaColi,
-	cromoTotal,
-	cadmioTotal,
-	dbo,
-	irregular} = req.body;
-    await coordinatesService.postParameters(
-    coordinateId,    
-    aluminioDissolvido,
-    arsenioTotal,
-    chumboTotal,
-    cobreDissolvido,
-    escherichiaColi,
-    cromoTotal,
-    cadmioTotal,
-    dbo,
-    irregular
-    )       
-    res.sendStatus(201)
+export async function deleteCoordinate(req,res){
+    const {id} = req.params
+    const{userId} = req.body
+    await coordinatesService.deleteCoordinate(coordId)       
+    res.sendStatus(200)
 }
+
 
 export async function getOneCoordinate(req,res){
     const {id} = req.params
@@ -45,9 +27,3 @@ export async function getOneCoordinate(req,res){
     res.status(200).send(coordinate)   
 }
 
-export async function getOneIrregularCoordinate(req,res){
-    const {id} = req.params
-    const {userId} = req.body;
-    const coordinate = await coordinatesService.getIrregularCoordinate(userId,id) 
-    res.status(200).send(coordinate)   
-}
