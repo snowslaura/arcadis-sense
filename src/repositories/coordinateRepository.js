@@ -1,4 +1,4 @@
-
+import db from "../../config/db.js";
 
 export async function getCoordinatesByUserId(userId) {
     return db.query(`
@@ -15,19 +15,16 @@ export async function postCoordinate(userId, name, xCoordinate, yCoordinate){
         [userId, name, xCoordinate, yCoordinate]);
 }
 
-export async function deleteCoordinate(coordId){
+export async function deleteCoordinate(coordId,userId){
     return db.query(`
         DELETE  FROM coordinates
-        WHERE id=$1`,
-        [coordId]);
+        WHERE id=$1 AND userId=$2`,
+        [coordId,userId]);
 }
 
 export async function getCoordinateByUserIdAndId(userId,id){
     return db.query(`
-        SELECT coordinates.*, kpi.*
-        FROM coordinates
-        JOIN kpi
-        ON coordinates.id = kpi."coordinateId"
-        WHERE coordinates."userId"=$1 AND coordinates.id=$2`,
+        SELECT FROM coordinates       
+        WHERE "userId"=$1 AND id=$2`,
         [userId,id]);
 }

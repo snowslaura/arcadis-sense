@@ -15,7 +15,7 @@ export async function postCoordinate(req,res){
 export async function deleteCoordinate(req,res){
     const {id} = req.params
     const{userId} = req.body
-    await coordinatesService.deleteCoordinate(coordId)       
+    await coordinatesService.deleteCoordinate(id, userId)       
     res.sendStatus(200)
 }
 

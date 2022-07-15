@@ -9,8 +9,8 @@ export async function postCoordinate(userId, name, xCoordinate, yCoordinate){
     await coordinateRepository.postCoordinate(userId, name, xCoordinate, yCoordinate)    
 }
 
-export async function deleteCoordinate(coordId) {
-    await coordinateRepository.deleteCoordinate(coordId)    
+export async function deleteCoordinate(coordId,userId) {
+    await coordinateRepository.deleteCoordinate(coordId,userId)    
 }
 
 export async function getCoordinate(userId,id){
