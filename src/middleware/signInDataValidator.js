@@ -1,10 +1,10 @@
-import signUpSchema from "./../schemas/signupSchema.js";
+import singInSchema from "./../schemas/signinSchema.js";
 
 export async function signInDataVerification (req, res, next) {
-
-    const validation = signUpSchema.validate(req.body, { abortEarly: false });
+    const body = req.body
+    const validation = singInSchema.validate(body, { abortEarly: false });
     if (validation.error) {
-        return res.status(422).send(validation.error.details);
+        return res.status(422).send(error.details.map((error) => error.message));
     }
 
     next();

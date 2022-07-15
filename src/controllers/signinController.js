@@ -1,7 +1,7 @@
-import * as signInService from "./../services/signUpService.js"
+import * as signInService from "./../services/signInService.js"
 
 export async function signIn(req,res){
     const {email, password} = req.body;
     await signInService.logInUser(email,password)         
-    res.send(201)
+    res.sendStatus(200)
 }

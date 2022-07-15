@@ -5,7 +5,7 @@ export async function createUser(userName,email,password){
     await verifyUserName(userName)
     await verifyEmail(email)
     const encryptedPassword = await encryptPassword(password)
-    await insertNewUser(userName,email,encryptedPassword)    
+    await insertNewUser(email, encryptedPassword, userName)    
 }
 
 async function verifyUserName(userName){
