@@ -3,8 +3,26 @@ import db from "../../config/db.js";
 export async function getCoordinatesByUserId(userId) {
     return db.query(`
         SELECT * FROM coordinates
-        WHERE "userId" = $1`,
+        WHERE coordinates."userId"=$1`,
         [userId]);
+}
+
+export async function getCoordinatesAndParametersByUserId(userId) {
+    return db.query(`
+        SELECT coordinates.*,kpi.*
+        FROM kpi
+        JOIN coordinates
+        ON kpi."coordinateId" = coordinates.id
+        WHERE coordinates."userId"=$1`,
+        [userId]);
+}
+
+
+export async function getCoordinateByCoordintesAndUser(userId, name, xCoordinate, yCoordinate){
+    return db.query(`
+        SELECT * FROM coordinates
+        WHERE "userId"=$1 AND name=$2 AND "xCoordinate"=$3 AND "yCoordinate"=$4`,
+        [userId,name,xCoordinate,xCoordinate,yCoordinate]);
 }
 
 export async function postCoordinate(userId, name, xCoordinate, yCoordinate){

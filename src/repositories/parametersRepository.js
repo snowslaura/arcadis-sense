@@ -43,11 +43,34 @@ export async function deleteParameteres(id){
     `,[id])
 }
 
-export async function getParameteres(id){
+export async function getOneParameter(id, userId){
     return db.query(`
-    SELECT FROM kpi
-    WHERE id=$1
-    `,[id]) 
+    SELECT coordinates.*,kpi.*
+    FROM kpi
+    JOIN coordinates
+    ON kpi."coordinateId" = coordinates.id
+    WHERE coordinates."userId"=$1 AND kpi.id=$2
+    `,[userId,id]) 
+}
+
+export async function getParameteres(userId){
+    return db.query(`
+    SELECT coordinates.*,kpi.*
+    FROM kpi
+    JOIN coordinates
+    ON kpi."coordinateId" = coordinates.id
+    WHERE coordinates."userId"=$1
+    `,[userId]) 
+}
+
+export async function getParametersFromOneCoordinate(id,userId){
+    return db.query(`
+    SELECT coordinates.id,coordinates.name,coordinates."userId", coordinates."xCoordinate", coordinates."yCoordinate",kpi.*
+    FROM kpi
+    JOIN coordinates
+    ON kpi."coordinateId" = coordinates.id
+    WHERE coordinates."userId"=$1 AND kpi."coordinateId"=$2
+    `,[userId,id]) 
 }
 
 export async function updateParameteres(

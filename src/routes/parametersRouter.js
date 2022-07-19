@@ -1,13 +1,16 @@
 import { Router } from "express";
-import { postParameters , deleteParameteres,getParameteres, updateParameteres} from "./../controllers/parametersController.js"
+import { postParameters , deleteParameteres,getParameteres, updateParameteres, getOneParameter, getParametersFromOneCoordinate} from "./../controllers/parametersController.js"
 import { postParameterValidator } from "../middleware/postParameterMiddleware.js";
+import { tokenValidator } from "../middleware/tokenValidatorMiddleware.js";
 
 const parameteres = Router()
 
-parameteres.post('/parameters', postParameterValidator, postParameters)
-parameteres.delete('/parameters', deleteParameteres)
-parameteres.get('/parameters', getParameteres)
-parameteres.put('/parameters',postParameterValidator, updateParameteres)
+parameteres.post('/parameters',tokenValidator, postParameterValidator, postParameters)
+parameteres.delete('/parameters',tokenValidator, deleteParameteres)
+parameteres.get('/parameters',tokenValidator, getParameteres)
+parameteres.get('/parameters/:id',tokenValidator, getOneParameter)
+parameteres.get('/parameters/coordinate/:id',tokenValidator, getParametersFromOneCoordinate)
+parameteres.put('/parameters',tokenValidator,postParameterValidator, updateParameteres)
 
 
 export default parameteres;

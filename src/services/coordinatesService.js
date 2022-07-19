@@ -4,8 +4,8 @@ export async function getCoordinatesByUser(userId){
     const {rows:coordinates} = await coordinateRepository.getCoordinatesByUserId(userId)
     return coordinates
 }
-
 export async function postCoordinate(userId, name, xCoordinate, yCoordinate){
+    await verifyCoordinates(userId, name, xCoordinate, yCoordinate)
     await coordinateRepository.postCoordinate(userId, name, xCoordinate, yCoordinate)    
 }
 
@@ -19,3 +19,10 @@ export async function getCoordinate(userId,id){
 }
 
 
+async function verifyCoordinates(userId, name, xCoordinate, yCoordinate){
+  const coordinate = await coordinateRepository.getCoordinateByCoordintesAndUser(userId, name, xCoordinate, yCoordinate)
+  if(coordinate)throw{
+    type:"conflict",
+    message:"Já existe uma coordenada com esses dados"
+  }
+}

@@ -11,7 +11,7 @@ const postParametersSchema = joi.object(
         cromoTotal:joi.number().precision(3).required(),
         cadmioTotal:joi.number().precision(4).required(),
         dbo:joi.number().integer().required(),
-        irregular:joi.boolean().required()    
+        // irregular:joi.boolean().required()    
     }
 )
 
