@@ -76,3 +76,10 @@ export async function updateParameteres(req,res){
         irregular)
     res.sendStatus(200)
 }
+
+export async function getOneCoordinateParameterByName(req,res){
+    const {parameter, name} = req.query
+    const {userId} = res.locals
+    const result =  await paramatersService.getOneCoordinateParameterByName(userId, parameter, name)
+    res.status(200).send(result)
+}

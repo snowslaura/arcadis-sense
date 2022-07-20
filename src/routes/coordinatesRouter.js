@@ -1,5 +1,5 @@
 import {Router} from "express"
-import {deleteCoordinate, getCoordinates,getOneCoordinate,  postCoordinate} from "./../controllers/coordinatesController.js"
+import {deleteCoordinate, getCoordinates,getOneCoordinate, getOneCoordinateByNameOrCoordinate,  postCoordinate} from "./../controllers/coordinatesController.js"
 import {postCoordinateValidator} from "./../middleware/postCoordinateMiddleware.js"
 import {tokenValidator} from "./../middleware/tokenValidatorMiddleware.js"
 
@@ -8,5 +8,6 @@ coordinates.post('/coordinates',tokenValidator,postCoordinateValidator, postCoor
 coordinates.get('/coordinates',tokenValidator, getCoordinates )
 coordinates.delete('/coordinates/:id',tokenValidator, deleteCoordinate)
 coordinates.get('/coordinates/:id', tokenValidator, getOneCoordinate)
+coordinates.get('/coordinate', tokenValidator, getOneCoordinateByNameOrCoordinate)
 
 export default coordinates;

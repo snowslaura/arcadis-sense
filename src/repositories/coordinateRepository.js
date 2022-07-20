@@ -17,15 +17,30 @@ export async function getCoordinatesAndParametersByUserId(userId) {
         [userId]);
 }
 
+export async function getCoordinateByUserIdAndName(userId,name){
+    return db.query(`
+    SELECT * FROM coordinates
+    WHERE "userId"=$1 AND name=$2`,
+    [userId,name]); 
+}
+
+export async function getCoordinateByUserIdAndCoordinate(userId,x,y){
+    return db.query(`
+    SELECT * FROM coordinates
+    WHERE "userId"=$1 AND "xCoordinate"=$2 AND "yCoordinate"=$3` ,
+    [userId,x,y]); 
+}
+
 
 export async function getCoordinateByCoordintesAndUser(userId, name, xCoordinate, yCoordinate){
     return db.query(`
         SELECT * FROM coordinates
         WHERE "userId"=$1 AND name=$2 AND "xCoordinate"=$3 AND "yCoordinate"=$4`,
-        [userId,name,xCoordinate,xCoordinate,yCoordinate]);
+        [userId,name,xCoordinate,yCoordinate]);
 }
 
 export async function postCoordinate(userId, name, xCoordinate, yCoordinate){
+    console.log("entrei no service")
     return db.query(`
         INSERT INTO coordinates
         ("userId", name, "xCoordinate", "yCoordinate")

@@ -87,10 +87,14 @@ export async function getParametersFromOneCoordinate(id,userId){
     return parameters
 }
 
-// export async function getParametersFromOneCoordinate(id,userId){
-//     const {rows:parameters} = await parametersRepository.getParametersFromOneCoordinate(id,userId)
-//     return parameters
-// }
+export async function getOneCoordinateParameterByName(userId, parameter, name){
+    const {rows:result} = await parametersRepository.getOneCoordinateParameterByName(userId, parameter, name)
+    if(result.lenght===0)throw{
+        type:"not_found",
+        message:"Coordenada inexistente"
+    }
+    return result  
+}
 
 export async function updateParameteres(
     id,

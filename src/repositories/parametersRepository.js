@@ -110,3 +110,14 @@ export async function updateParameteres(
         dbo,
         irregular, id]) 
 }
+
+export async function getOneCoordinateParameterByName(userId, parameter, name){
+    return db.query(`
+    SELECT coordinates.id,coordinates.name,coordinates."userId", coordinates."xCoordinate", coordinates."yCoordinate", AVG(kpi."${parameter}")
+    FROM kpi
+    JOIN coordinates
+    ON kpi."coordinateId" = coordinates.id
+    WHERE coordinates."userId"=$1 AND coordinates.name=$2
+    GROUP BY coordinates.id
+    `,[userId, name]) 
+}
