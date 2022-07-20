@@ -16,7 +16,7 @@ Você pode se registrar, fazer login, registrar pontos, registrar parametros de 
 <h3>Database and backend deploy link</h3>
 https://projeto19-drivenpass-back.herokuapp.com
 
-<h3>Front-end deploy</h3>
+<h3>Front-end deploy link</h3>
 https://arcadis-sense-front-9cb84f3qd-snowslaura.vercel.app/
 
 # Usage </br>
